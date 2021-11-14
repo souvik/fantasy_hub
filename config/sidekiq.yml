@@ -1,0 +1,4 @@
+:schedule:
+  fantasy_team_import_job:
+    every: [ '1h', first_in: '0s' ]
+    class: FantasyTeamImportJob

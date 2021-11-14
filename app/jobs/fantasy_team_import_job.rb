@@ -3,7 +3,7 @@ require 'sidekiq-scheduler'
 class FantasyTeamImportJob < ApplicationJob
   queue_as :default
 
-  def perform(*args)
+  def perform
     formula1 = Formula1APIService.new
     teams_response = formula1.fetch_fantasy_teams
     teams = JSON.parse(teams_response.body, symbolize_names: true)[:teams]
@@ -20,6 +20,7 @@ class FantasyTeamImportJob < ApplicationJob
         Rails.logger.error "Failed to save Team: #{e.record.id} due to: #{e.message}"
       end
     end
+    FantasyPlayerImportJob.set(wait: 1.minute).perform_now
   end
 
   private

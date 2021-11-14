@@ -6,4 +6,8 @@ class Formula1APIService
   def fetch_fantasy_teams
     self.class.get('/teams', verify: false)
   end
+
+  def fetch_fantasy_players
+    self.class.get('/players', verify: false)
+  end
 end

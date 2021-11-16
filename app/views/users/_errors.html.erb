@@ -1,0 +1,12 @@
+<% if model && model.errors.any? %>
+  <div class="error-explanation mb-3">
+    <div class="header"><%= pluralize(model.errors.count, "error") %> prohibited this card from being saved:</div>
+    <div class="messages">
+      <ul class="mb-0 list-group list-group-flush">
+        <% model.errors.full_messages.each do |msg| %>
+          <li class="list-group-item"><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

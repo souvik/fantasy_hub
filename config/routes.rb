@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get '/sessions', to: redirect('/')
   post '/sessions', to: 'sessions#create'
 
-  resources :users, only: [ :create ] do
+  resources :users, only: [ :new, :create ] do
     resources :teams
   end
 

@@ -1,16 +1,20 @@
+<% content_for :title_text do %>
+  SignIn
+<% end %>
 <div class="session-new">
   <% flash.each do |type, msg| %>
     <div class="alert alert-danger" role="alert"><%= msg %></div>
   <% end %>
   <%= form_with url: sessions_path, class: 'session-form' do |form| %>
     <div class="mb-3">
-      <%= form.label :email, 'Email' %>
+      <%= form.label :email, 'Email', class: 'form-label' %>
       <%= form.text_field :email, class: 'form-control' %>
     </div>
     <div class="mb-3">
-      <%= form.label :password, 'Password' %>
+      <%= form.label :password, 'Password', class: 'form-label' %>
       <%= form.password_field :password, class: 'form-control' %>
     </div>
     <%= form.submit 'SignIn', class: 'btn btn-primary' %>
+    <%= link_to 'Sign Up', new_user_path  %>
   <% end %>
 </div>

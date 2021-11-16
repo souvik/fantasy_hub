@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fantasy Hub:</title>
+    <title>Fantasy Hub: <%= yield :title_text %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +10,22 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" role="navigation">
+      <div class="container">
+        <%= link_to 'FantasyHub', root_path, class: 'navbar-brandh' %>
+        <div class="collapse navbar-collapse justify-content-end">
+          <% if Current.user %>
+            Hi, <%= Current.user.first_name %>
+          <% else %>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <%= link_to 'Sign Up', new_user_path, class: 'nav-link' %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+    </nav>
     <div class="container">
       <%= yield %>
     </div>

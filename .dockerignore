@@ -19,8 +19,6 @@ yarn-debug.log*
 .gitignore
 .yarn-integrity
 
-/config/master.key
-
 !.env.sample
 .env
 

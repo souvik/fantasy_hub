@@ -13,13 +13,19 @@ services:
       POSTGRES_USER: fantasydbuser
       POSTGRES_DB: fantasy_hub_development
 
+  redis:
+    image: redis:6.2.6
+    ports:
+      - 6379:6379
+
   app:
     build:
       context: .
       target: dev
-    command: bash -c "bin/drun.sh"
+    command: bash -c bin/drun.sh
     depends_on:
       - db
+      - redis
     ports:
       - 3010:3000
     volumes:
@@ -30,6 +36,25 @@ services:
       DATABASE_USERNAME: fantasydbuser
       DATABASE_PASSWORD: password
       DATABASE_HOST: db
+      REDIS_PROVIDER: redis://redis:6379
+
+  jobs:
+    build:
+      context: .
+      target: dev
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/usr/src/app
+    environment:
+      RAILS_ENV: development
+      DATABASE_NAME: fantasy_hub_development
+      DATABASE_USERNAME: fantasydbuser
+      DATABASE_PASSWORD: password
+      DATABASE_HOST: db
+      REDIS_PROVIDER: redis://redis:6379
 
 networks:
   default:

@@ -1,0 +1,32 @@
+<% content_for :title_text do %>
+  Teams
+<% end %>
+<div class="row page-header">
+  <div class="col">
+    <h3 class="justify-content-start"><%= Current.user.first_name %> Teams</h3>
+    <%= link_to 'Create New Team', new_team_path, class: 'justify-content-end' %>
+  </div>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Short Name</th>
+      <th scope="col">Abbreviation</th>
+      <th scope="col">Created Date</th>
+      <th scope="col"></th>
+    </tr>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.name %></td>
+        <td><%= team.short_name %></td>
+        <td><%= team.abbreviation %></td>
+        <td><%= team.crated_at %></td>
+        <td></td>
+      </tr>
+    <% end %>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

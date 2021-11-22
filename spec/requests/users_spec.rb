@@ -36,6 +36,7 @@ RSpec.describe "Users", type: :request do
     end
 
     it 'redirects (:found) on save the user' do
+      allow_any_instance_of(User).to receive(:save!).and_return(true)
       post users_path, params: user_params
       expect(response).to have_http_status(:found)
     end

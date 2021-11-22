@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   get '/sessions', to: redirect('/')
   post '/sessions', to: 'sessions#create'
 
-  resources :users, only: [ :new, :create ] do
-    resources :teams
+  resources :users, only: [ :new, :create ]
+  scope '/users' do
+    resources :teams, except: [ :destroy ]
   end
 
   root 'sessions#new'

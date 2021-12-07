@@ -87,6 +87,6 @@ test:
 #
 production:
   <<: *default
-  database: app_production
+  database: fantasy_hub_production
   username: app
   password: <%= ENV['APP_DATABASE_PASSWORD'] %>
